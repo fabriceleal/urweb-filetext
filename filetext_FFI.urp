@@ -1,0 +1,4 @@
+ffi filetext_FFI
+link filetext_FFI.o
+include filetext_FFI.h
+
