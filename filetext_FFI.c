@@ -5,6 +5,8 @@ uw_Basis_string uw_Filetext_FFI_blobAsText (uw_context ctx,
 
   // TODO check if blob.data is a valid ascii string
   // that means no \0 in the middle, no unprintable chars
+  // TODO do i need to handle the byte order mask of utf8 files?
+  // TODO are ascii files any different?
   
   if(blob.size < 1)
     goto invalid;
