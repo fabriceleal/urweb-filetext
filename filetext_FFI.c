@@ -10,8 +10,23 @@ uw_Basis_string uw_Filetext_FFI_blobAsText (uw_context ctx,
   
   if(blob.size < 1)
     goto invalid;
+
+  int offset = 0;
   
-  for(int i = 0; i < blob.size; ++i)
+  if(blob.size > 2) {
+    if(blob.data[0] == -17 &&
+       blob.data[1] == -69 &&
+       blob.data[2] == -65)
+      {
+	// UTF8
+	offset = 3;
+      }
+  }
+  
+  if(blob.size == offset)
+    goto invalid;
+  
+  for(int i = offset; i < blob.size; ++i)
     {
       if(blob.data[i] == '\0')
 	goto invalid;
@@ -25,5 +40,5 @@ uw_Basis_string uw_Filetext_FFI_blobAsText (uw_context ctx,
 
  valid:
     
-  return blob.data;
+  return blob.data + offset;
 }
